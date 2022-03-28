@@ -1,0 +1,14 @@
+{
+    "images": ["stage1"],
+    "stageX": [200],
+    "stageY": [200],
+    "stageScrollX": [1],
+    "stageScrollY": [1],
+    "stageScaleX": [1],
+    "stageScaleY": [1],
+    "stageAngle": [0],
+    "useAnim": false,
+    "frameNames": [],
+    "animationNames": [],
+    "animationFrame": []
+}

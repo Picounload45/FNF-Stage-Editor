@@ -32,6 +32,7 @@
 	<set name="BUILD_DIR" value="export" />
 	<source path="source" />
 	<assets path="stage"/>
+	<assets path="assets" embed='true'/>
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
