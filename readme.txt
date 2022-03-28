@@ -1,6 +1,3 @@
-<<<<<<< Updated upstream
---한국어 / Korean--
-=======
 --English-- (I used translator)
 1. How to load an image without using source code
     Change the stage1.png etc. in the stage folder.
@@ -26,7 +23,6 @@
 
 
 --한국어--
->>>>>>> Stashed changes
 1.  소스코드를 사용하지 않고 이미지 로드 방법
     stage폴더에 있는 stage1.png등등을 갈아끼운다
     (선택) 애니메이션들도 똑같이 합니다
