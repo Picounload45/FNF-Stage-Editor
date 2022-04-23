@@ -19,6 +19,7 @@ import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
 import haxe.Json;
 import lime.system.System;
+import openfl.net.FileReference;
 import sys.FileSystem;
 import sys.io.File;
 
@@ -49,7 +50,7 @@ typedef StageJSON =
 	var stageScaleX:Array<Float>;
 	var stageScaleY:Array<Float>;
 	var stageAngle:Array<Float>;
-	var useAnim:Bool;
+	var useAnim:Array<Bool>;
 	var frameNames:Array<String>;
 	var animationNames:Array<String>;
 	var animationFrame:Array<String>; // Its like xml frame name
@@ -88,6 +89,21 @@ class PlayState extends FlxState
 	{
 		camStage = new FlxCamera();
 		camHUD = new FlxCamera();
+
+		GOD = {
+			images: [],
+			stageAngle: [],
+			stageScaleY: [],
+			stageScaleX: [],
+			stageScrollY: [],
+			stageScrollX: [],
+			stageY: [],
+			stageX: [],
+			animationFrame: [],
+			animationNames: [],
+			frameNames: [],
+			useAnim: []
+		};
 
 		FlxG.cameras.reset(camStage);
 		FlxG.cameras.add(camHUD);
@@ -170,10 +186,8 @@ class PlayState extends FlxState
 			positionTxt.text = 'Currect Selected Stage X/Y, ScrollFactor X/Y, Angle, Scale X/Y: Null';
 		}
 
-		if (GOD != null)
-		{
 			if (usinAnimation_CB != null)
-				GOD.useAnim = usinAnimation_CB.checked;
+				GOD.useAnim[curSelected] = usinAnimation_CB.checked;
 			if (spriteNames != null)
 				GOD.images = spriteNames;
 			if (stageGrp != null && stageGrp.length > 0)
@@ -187,7 +201,6 @@ class PlayState extends FlxState
 				GOD.animationNames = animations;
 				GOD.animationFrame = animations;
 			}
-		}
 
 		for (i in 0...blockControlOnTyping.length)
 		{
@@ -341,14 +354,6 @@ class PlayState extends FlxState
 					trace(animations);
 				});
 
-				var previewBt:FlxButton = new FlxButton(addAnimationBt.x + (addAnimationBt.width / 2), addAnimationBt.y + 80, "Preview", function()
-				{
-					box.visible = false;
-					helpTxt.visible = false;
-					positionTxt.visible = false;
-					openSubState(new FNFPsychEngineSubstate(0, 0, camHUD));
-				});
-
 				var removeAnimBt:FlxButton = new FlxButton(addAnimationBt.x + addAnimationBt.width + 20, addAnimationBt.y, "Remove Animation", function()
 				{
 					if (animationNameInput.text != null)
@@ -372,7 +377,6 @@ class PlayState extends FlxState
 				scrollXInput.cameras = [camHUD];
 				scrollYInput.cameras = [camHUD];
 				stageNumStepper2.cameras = [camHUD];
-				previewBt.cameras = [camHUD];
 				scalexInput.cameras = [camHUD];
 				scaleyInput.cameras = [camHUD];
 				angleInput.cameras = [camHUD];
@@ -395,7 +399,6 @@ class PlayState extends FlxState
 				wow.add(addAnimationBt);
 				wow.add(removeAnimBt);
 				wow.add(playAnimBt);
-				wow.add(previewBt);
 				wow.add(angleInput);
 				wow.add(scalexInput);
 				wow.add(scaleyInput);
@@ -415,7 +418,7 @@ class PlayState extends FlxState
 
 				var saveBt:FlxButton = new FlxButton(loadBt.x, loadBt.y + 40, "Save Json", function()
 				{
-					JSONMenu.save();
+					save();
 				});
 				var wow = new FlxUI(null, box);
 				wow.name = 'File';
@@ -427,6 +430,20 @@ class PlayState extends FlxState
 				box.addGroup(wow);
 		}
 	}
+
+	var jsonRe:FileReference;
+	private function save()
+    {
+        var jsonFile = PlayState.GOD;
+        var newJSON = Json.stringify(jsonFile, "\t");
+        trace(newJSON.trim());
+
+        if (newJSON != null && newJSON.length > 0)
+        {
+            jsonRe = new FileReference();
+            jsonRe.save(newJSON.trim(), "stage1.json");
+        }
+    }
 
 	function loadAllShit()
 	{
@@ -442,7 +459,7 @@ class PlayState extends FlxState
 		for (i in 0...GOD.images.length)
 		{
 			var newSprite:FlxSprite = new FlxSprite(GOD.stageX[i], GOD.stageY[i]);
-			if (GOD.useAnim && (GOD.animationFrame != null && GOD.animationFrame.length > 0) && (GOD.animationNames != null && GOD.animationNames.length > 0) && (GOD.frameNames != null && GOD.frameNames.length > 0))
+			if (GOD.useAnim[i] && (GOD.animationFrame != null && GOD.animationFrame.length > 0) && (GOD.animationNames != null && GOD.animationNames.length > 0) && (GOD.frameNames != null && GOD.frameNames.length > 0))
 			{
 				newSprite.frames = FlxAtlasFrames.fromSparrow('stage/' + GOD.frameNames[i] + '.png', 'stage/' + GOD.frameNames[i] + '.xml');
 				for (i in 0...GOD.animationNames.length)

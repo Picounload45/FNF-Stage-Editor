@@ -2,8 +2,6 @@ package;
 
 import PlayState.StageJSON;
 import haxe.Json;
-import openfl.net.FileReference;
-import sys.FileSystem;
 import sys.io.File;
 
 using StringTools;
@@ -28,23 +26,5 @@ class JSONMenu
         var jsonFile:StageJSON = Json.parse(why);
         trace(jsonFile);
         return jsonFile;
-    }
-
-    public static var jsonRe:FileReference;
-
-    /**
-    * Saves A StageJson File
-    **/
-    public static function save()
-    {
-        var jsonFile = PlayState.GOD;
-        var newJSON = Json.stringify(jsonFile, "\t");
-        trace(newJSON.trim());
-
-        if (newJSON != null && newJSON.length > 0)
-        {
-            jsonRe = new FileReference();
-            jsonRe.save(newJSON.trim(), "stage1.json");
-        }
     }
 }

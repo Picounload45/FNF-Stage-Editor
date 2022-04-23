@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
 --English-- (I used translator)
 1. How to load an image without using source code
     Change the stage1.png etc. in the stage folder.
