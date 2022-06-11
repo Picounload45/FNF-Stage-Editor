@@ -5,6 +5,9 @@
 	<!-- _________________________ Application Settings _________________________ -->
 
 	<app title="Friday Night Funkin': Stage Editor" file="Stage Editor" main="Main" version="0.0.1" company="Lego0_77" />
+         
+        <!--Switch Export with Unique ApplicationID and Icon-->
+	<set name="APP_ID" value="0x0100f6c013bbc000" />
 
 	<!--The flixel preloader is not accurate in Chrome. You can use it regularly if you embed the swf into a html file
 		or you can set the actual size of your file manually at "FlxPreloaderBase-onUpdate-bytesTotal"-->
