@@ -34,6 +34,10 @@
 	<!-- _____________________________ Path Settings ____________________________ -->
 
 	<set name="BUILD_DIR" value="export" />
+        <set name="BUILD_DIR" value="export/debug" if="debug" />
+	<set name="BUILD_DIR" value="export/release" unless="debug" />
+	<set name="BUILD_DIR" value="export/32bit" if="32bit" />
+
 	<source path="source" />
 	<assets path="stage"/>
 
@@ -50,14 +54,6 @@
 	<!--In case you want to use nape with flixel-->
 	<!--<haxelib name="nape-haxe4" />-->
          
-         <!--In case you want to use the ui package-->
-	<haxelib name="flixel-ui" />
-	<haxelib name="newgrounds" unless="mobile"/>
-	<haxelib name="faxe" if='switch'/>
-	<!-- <haxelib name="polymod"/> -->
-	<haxelib name="discord_rpc" if="windows"/>
-	<haxelib name="linc_luajit" if="windows"/>
-
 	<!-- ______________________________ Haxedefines _____________________________ -->
 
 	<!--Enable the Flixel core recording system-->
