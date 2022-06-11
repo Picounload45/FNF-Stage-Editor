@@ -29,6 +29,7 @@
 
 	<!--Mobile-specific-->
 	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" />
+        <define name="mobileC" if="mobile" />
 
 	<!-- _____________________________ Path Settings ____________________________ -->
 
